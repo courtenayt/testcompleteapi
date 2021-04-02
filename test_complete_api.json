@@ -1,0 +1,1434 @@
+{
+  "apiVersion" : "1",
+  "swaggerVersion" : "1.2",
+  "basePath" : "http:\/\/localhost:2377\/1",
+  "info" : {
+    "title" : "TestComplete API"
+  },
+  "apis" : [
+    {
+      "operations" : [
+        {
+          "method" : "POST",
+          "notes" : "Call this method before calling any other method.",
+          "parameters" : [
+
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Prepares TestComplete for test execution"
+        }
+      ],
+      "path" : "\/initialize"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "POST",
+          "notes" : "You can use the method to run desktop applications.<br\/><h4>Return Value<\/h4><p>The Process object that corresponds to the launched application instance.<\/p>",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "description" : "The name of the application's executable file",
+              "name" : "path",
+              "paramType" : "query",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "defaultValue" : "",
+              "description" : "The user name under whose account the application will run. Use the <i>DomainName\\UserName<\/i> format for domain users",
+              "name" : "user_name",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "defaultValue" : "",
+              "description" : "The user&apos;s password",
+              "name" : "password",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "defaultValue" : "",
+              "description" : "The command-line arguments that will be used to run the application",
+              "name" : "command_line",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "defaultValue" : "",
+              "description" : "The path to the application&apos;s working folder",
+              "name" : "working_folder",
+              "paramType" : "query",
+              "required" : false
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Runs an application"
+        }
+      ],
+      "path" : "\/applications\/run"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "POST",
+          "notes" : "To specify a Windows Store application to run, use its package name. It is the name specified in the package manifest.<br\/><h4>Return Value<\/h4><p>The Process object that corresponds to the launched application instance.<\/p>",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "description" : "The application&apos;s package name",
+              "name" : "package_name",
+              "paramType" : "query",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "defaultValue" : "",
+              "description" : "The command-line arguments that will be used to run the application",
+              "name" : "command_line",
+              "paramType" : "query",
+              "required" : false
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Runs a Windows Store application"
+        }
+      ],
+      "path" : "\/applications\/packages\/run"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "GET",
+          "notes" : "The method returns information only about the web browsers the test engine supports and that are available on the current computer.",
+          "parameters" : [
+
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Returns a list of available web browsers"
+        }
+      ],
+      "path" : "\/applications\/browsers"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "POST",
+          "notes" : "If you specify a URL as a parameter, the method will launch the browser and navigate to the specified web page. We recommend that you specify the full URL of the needed page, including the protocol name, page extension, trailing slash and so on.<br\/><h4>Return Value<\/h4><p>The ID of the process (PID) that corresponds to the launched browser instance.<\/p>",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "description" : "The browser family",
+              "enum" : [
+                "chrome",
+                "edge",
+                "firefox",
+                "iexplore"
+              ],
+              "name" : "family",
+              "paramType" : "query",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "defaultValue" : "any",
+              "description" : "The type of the browser&apos;s executable",
+              "enum" : [
+                "any",
+                "x86",
+                "x64"
+              ],
+              "name" : "platform",
+              "paramType" : "query",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "defaultValue" : "",
+              "description" : "The version of the browser to run. The string may contain various combinations of digits and separator characters. For example, all the following strings are valid values for the version parameter: <i>\"3\", \"16.\", \"3.6.\", \"3.6.28\", \"9.0.8112.16421\"<\/i>.",
+              "name" : "version",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "defaultValue" : "",
+              "description" : "The URL of the page the browser will open",
+              "name" : "url",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "defaultValue" : "",
+              "description" : "The browser&apos;s command-line arguments",
+              "name" : "command_line",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "int",
+              "description" : "The time (in milliseconds) to wait until the browser loads the page",
+              "name" : "wait_time",
+              "paramType" : "query",
+              "required" : false
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Runs a web browser"
+        }
+      ],
+      "path" : "\/applications\/browsers\/run"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "GET",
+          "notes" : "The method returns an array of child objects that belong to the specified object in the object hierarchy.<br\/>The top-level object in the object hierarchy (the Sys object) has a constant ID, <span style=\"font-family: monospace;\">4a9f9237-c1f7-4b80-9573-8440d7b37dc6<\/span>.<br\/>",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "defaultValue" : "4a9f9237-c1f7-4b80-9573-8440d7b37dc6",
+              "description" : "The ID of the object whose child objects you want to get",
+              "name" : "id",
+              "paramType" : "path",
+              "required" : true
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Returns a list of children of the specified object"
+        }
+      ],
+      "path" : "\/sys\/{id}\/children"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "GET",
+          "notes" : "Returns a list of properties and methods of the specified object.",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "defaultValue" : "4a9f9237-c1f7-4b80-9573-8440d7b37dc6",
+              "description" : "The ID of the object whose properties and methods you want to get",
+              "name" : "id",
+              "paramType" : "path",
+              "required" : true
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Returns a list of object methods and properties"
+        }
+      ],
+      "path" : "\/sys\/{id}\/members"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "GET",
+          "notes" : "Returns the value of the specified property of the object specified by its ID.<br\/>To specify property arguments:<br\/><ul><li>Enclose string values in quotes.<\/li><li>Specify integer values without digit grouping symbols.<\/li><li>Specify Boolean values as true or false (without quotes).<\/li><\/ul>",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "defaultValue" : "4a9f9237-c1f7-4b80-9573-8440d7b37dc6",
+              "description" : "The ID of the object whose property you want to get",
+              "name" : "id",
+              "paramType" : "path",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "description" : "The property name",
+              "name" : "name",
+              "paramType" : "path",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "description" : "The first argument.",
+              "name" : "arg1",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "description" : "The second argument.",
+              "name" : "arg2",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "description" : "The third argument.",
+              "name" : "arg3",
+              "paramType" : "query",
+              "required" : false
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Returns the value of an object's property"
+        },
+        {
+          "method" : "POST",
+          "notes" : "Assigns a new value to a property of the object specified by its ID.<br\/>To specify property arguments:<br\/><ul><li>Enclose string values in quotes.<\/li><li>Specify integer values without digit grouping symbols.<\/li><li>Specify Boolean values as true or false (without quotes).<\/li><\/ul>",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "defaultValue" : "4a9f9237-c1f7-4b80-9573-8440d7b37dc6",
+              "description" : "The ID of the object whose property you want to change",
+              "name" : "id",
+              "paramType" : "path",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "description" : "The property name",
+              "name" : "name",
+              "paramType" : "path",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "description" : "The first argument.",
+              "name" : "arg1",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "description" : "The second argument.",
+              "name" : "arg2",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "description" : "The third argument.",
+              "name" : "arg3",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "description" : "The property's new value",
+              "name" : "body",
+              "paramType" : "body",
+              "required" : true
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Assigns a new value to an object's property"
+        }
+      ],
+      "path" : "\/sys\/{id}\/property\/{name}"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "GET",
+          "notes" : "Calls a method of the object specified by its ID and returns the method's result (if any).<br \/>To specify the method's arguments:<ul><li>Enclose string values in quotes.<\/li><li>Specify integer values without digit grouping symbols.<\/li><li>Specify Boolean values as true or false (without quotes).<\/li><\/ul>",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "defaultValue" : "4a9f9237-c1f7-4b80-9573-8440d7b37dc6",
+              "description" : "The ID of the object whose method you want to call",
+              "name" : "id",
+              "paramType" : "path",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "description" : "The method's name",
+              "name" : "name",
+              "paramType" : "path",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "description" : "The first argument.",
+              "name" : "arg1",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "description" : "The second argument.",
+              "name" : "arg2",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "description" : "The third argument.",
+              "name" : "arg3",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "description" : "The fourth argument.",
+              "name" : "arg4",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "description" : "The fifth argument.",
+              "name" : "arg5",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "description" : "The sixth argument.",
+              "name" : "arg6",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "description" : "The seventh argument.",
+              "name" : "arg7",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "description" : "The eighth argument.",
+              "name" : "arg8",
+              "paramType" : "query",
+              "required" : false
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Calls an object's method"
+        }
+      ],
+      "path" : "\/sys\/{id}\/method\/{name}"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "POST",
+          "notes" : "The method searches for an object with the specified values of the specified properties. It searches for the object in the object hierarchy among child objects of the specified object down the hierarchy to the specified depth.<br\/>The method returns the first child that meets the search criteria.<br\/>The top-level object in the object hierarchy (the Sys object) has a constant ID, <span style=\"font-family: monospace;\">4a9f9237-c1f7-4b80-9573-8440d7b37dc6<\/span>.<br\/>",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "defaultValue" : "4a9f9237-c1f7-4b80-9573-8440d7b37dc6",
+              "description" : "The ID of the object whose child you want to find",
+              "name" : "id",
+              "paramType" : "path",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "defaultValue" : "{\n  \"ProcessName\": \"notepad\"\n}",
+              "description" : "The associative JSON array that contains property names of the sought-for object. Each property name must be paired with the appropriate property value",
+              "name" : "body",
+              "paramType" : "body",
+              "required" : true
+            },
+            {
+              "dataType" : "int",
+              "defaultValue" : 1,
+              "description" : "The maximum hierarchy level the method will reach while searching for the needed object",
+              "name" : "depth",
+              "paramType" : "query",
+              "required" : true
+            },
+            {
+              "dataType" : "int",
+              "defaultValue" : 0,
+              "description" : "The time (in milliseconds) the method will wait for the needed object to become available in the object hierarchy",
+              "name" : "timeout",
+              "paramType" : "query",
+              "required" : false
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Searches for an object in the object hierarchy"
+        }
+      ],
+      "path" : "\/sys\/{id}\/find"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "POST",
+          "notes" : "The method searches for objects with the specified values of the specified properties. It searches for the objects in the object hierarchy among child objects of the specified object down the hierarchy to the specified depth.<br\/>The method returns all the children that meet the search criteria.<br\/>The top-level object in the object hierarchy (the Sys object) has a constant ID, <span style=\"font-family: monospace;\">4a9f9237-c1f7-4b80-9573-8440d7b37dc6<\/span>.<br\/>",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "defaultValue" : "4a9f9237-c1f7-4b80-9573-8440d7b37dc6",
+              "description" : "The ID of the object whose child you want to find",
+              "name" : "id",
+              "paramType" : "path",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "defaultValue" : "{\n  \"ProcessName\": \"notepad\"\n}",
+              "description" : "The associative JSON array that contains property names of the sought-for object. Each property name must be paired with the appropriate property value",
+              "name" : "body",
+              "paramType" : "body",
+              "required" : true
+            },
+            {
+              "dataType" : "int",
+              "defaultValue" : 1,
+              "description" : "The maximum hierarchy level the method will reach while searching for the needed object",
+              "name" : "depth",
+              "paramType" : "query",
+              "required" : true
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Searches for objects in the object hierarchy"
+        }
+      ],
+      "path" : "\/sys\/{id}\/find_all"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "GET",
+          "notes" : "Returns property names paired with the appropriate property values that uniquely identify the object and its parent objects in the object hierarchy. You can use these properties and values to specify search criteria when searching for an object using the <span style=\"font-family: monospace;\">\/sys\/{id}\/find<\/span> method.<br\/>The method also returns a list of categories to which the object belongs. Depending on which categories the object belongs to, the test engine provides the object with extended properties and methods.",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "description" : "The ID of the object whose search criteria you want to get",
+              "name" : "id",
+              "paramType" : "path",
+              "required" : true
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Returns the object's identification data"
+        }
+      ],
+      "path" : "\/sys\/{id}\/identification"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "GET",
+          "notes" : "The method returns a list of categories to which the specified object belongs. Depending on which categories the object belongs to, the test engine provides the object with extended properties and methods.",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "defaultValue" : "4a9f9237-c1f7-4b80-9573-8440d7b37dc6",
+              "description" : "The ID of the object",
+              "name" : "id",
+              "paramType" : "path",
+              "required" : true
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Returns a list of object categories"
+        }
+      ],
+      "path" : "\/sys\/{id}\/categories"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "POST",
+          "notes" : "Shows a red frame around the specified object.<br\/>The object must be an onscreen object, that is, it must have a graphical user interface. The object (or part of it) must be visible on screen.<br\/>To cancel highlighting, use the <span style=\"font-family: monospace;\">\/sys\/{id}\/unhighlight<\/span> method.",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "description" : "The ID of the object to highlight",
+              "name" : "id",
+              "paramType" : "path",
+              "required" : true
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Highlights an object on screen"
+        }
+      ],
+      "path" : "\/sys\/{id}\/highlight"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "POST",
+          "notes" : "Use the method to cancel object highlighting activated by the <span style=\"font-family: monospace;\">\/sys\/{id}\/highlight<\/span> method.",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "description" : "The ID of the object that will not be highlighted anymore",
+              "name" : "id",
+              "paramType" : "path",
+              "required" : true
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Cancels object highlighting"
+        }
+      ],
+      "path" : "\/sys\/{id}\/unhighlight"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "GET",
+          "notes" : "The method makes a screenshot of the object specified by its ID.<br\/>The object must be an onscreen object, that is, it must have a graphical user interface. In addition, the object (or part of it) must be visible on screen.<br\/><h4>Result Value<\/h4><p>A PNG image of the object, in the Base64 format.<\/p>",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "defaultValue" : "",
+              "description" : "The ID of the object whose image you want to get",
+              "name" : "id",
+              "paramType" : "path",
+              "required" : true
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Returns an image of the specified object"
+        }
+      ],
+      "path" : "\/sys\/{id}\/screenshot"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "GET",
+          "notes" : "Generates a description for significant user controls placed on the specified object.",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "description" : "The ID of the object whose model you want to get",
+              "name" : "id",
+              "paramType" : "path",
+              "required" : true
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Returns the model of children of the specified object"
+        }
+      ],
+      "path" : "\/sys\/{id}\/model"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "GET",
+          "notes" : "The method gets the onscreen object (a window, popup window or a non-handled object) that contains a pixel with the specified screen coordinates.",
+          "parameters" : [
+            {
+              "dataType" : "int",
+              "description" : "The horizontal coordinate of the needed point on screen",
+              "name" : "x",
+              "paramType" : "query",
+              "required" : true
+            },
+            {
+              "dataType" : "int",
+              "description" : "The vertical coordinate of the needed point on screen",
+              "name" : "y",
+              "paramType" : "query",
+              "required" : true
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Returns the object that contains a pixel with the specified screen coordinates"
+        }
+      ],
+      "path" : "\/sys\/at_point"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "POST",
+          "notes" : "Posts a new informative message to the test log.<br\/>You can post additional text to the <b>Details<\/b> panel of the test log. Use the <span style=\"font-family: monospace;\">extended_message<\/span> parameter to specify the needed text. It can be plain text or HTML code (the additional text must start with a tag to be recognized as HTML code).",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "description" : "The message text",
+              "name" : "message",
+              "paramType" : "query",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "description" : "The additional text or HTML code that will be posted to the Details panel of the test log",
+              "name" : "extended_message",
+              "paramType" : "query",
+              "required" : false
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Posts a message to the test log"
+        }
+      ],
+      "path" : "\/log\/message"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "POST",
+          "notes" : "Posts an error message to the test log.<br\/>You can post additional text to the <b>Details<\/b> panel of the test log. Use the <span style=\"font-family: monospace;\">extended_message<\/span> parameter to specify the needed text. It can be plain text or HTML code (the additional text must start with a tag to be recognized as HTML code).",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "description" : "The text of the error message",
+              "name" : "message",
+              "paramType" : "query",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "description" : "The additional text or HTML code that will be posted to the Details panel of the test log",
+              "name" : "extended_message",
+              "paramType" : "query",
+              "required" : false
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Posts an error message to the test log"
+        }
+      ],
+      "path" : "\/log\/error"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "POST",
+          "notes" : "Posts a new warning message to the test log.<br\/>You can post additional text to the <b>Details<\/b> panel of the test log. Use the <span style=\"font-family: monospace;\">extended_message<\/span> parameter to specify the needed text. It can be plain text or HTML code (the additional text must start with a tag to be recognized as HTML code).",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "description" : "The warning text",
+              "name" : "message",
+              "paramType" : "query",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "description" : "The additional text or HTML code that will be posted to the Details panel of the test log",
+              "name" : "extended_message",
+              "paramType" : "query",
+              "required" : false
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Posts a warning to the test log"
+        }
+      ],
+      "path" : "\/log\/warning"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "POST",
+          "notes" : "Posts the specified PNG image to the test log.<br\/>You can post additional text to the <b>Details<\/b> panel of the test log. Use the <span style=\"font-family: monospace;\">extended_message<\/span> parameter to specify the needed text. (It can be plain text or HTML code (the additional text must start with a tag to be recognized as HTML code).",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "description" : "A sequence of bytes that represent the image to be posted",
+              "name" : "body",
+              "paramType" : "body",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "description" : "The text to be posted to the test log",
+              "name" : "message",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "description" : "The additional text or HTML code that will be posted to the Details panel of the test log",
+              "name" : "extended_message",
+              "paramType" : "query",
+              "required" : false
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Posts an image to the test log"
+        }
+      ],
+      "path" : "\/log\/picture"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "POST",
+          "notes" : "The method posts an image of the specified object to the test log. To specify the needed object, use its ID.<br\/>The object must be an onscreen object, that is, it must have a graphical user interface. In addition, the object (or part of it) must be visible on screen.<br\/>You can post additional text to the <b>Details<\/b> panel of the test log. Use the <span style=\"font-family: monospace;\">extended_message<\/span> parameter to specify the needed text. It can be plain text or HTML code (the additional text must start with a tag to be recognized as HTML code).",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "description" : "The ID of the object whose image you want to post",
+              "name" : "id",
+              "paramType" : "query",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "description" : "The text to be posted to the test log",
+              "name" : "message",
+              "paramType" : "query",
+              "required" : false
+            },
+            {
+              "dataType" : "string",
+              "description" : "The additional text or HTML code that will be posted to the Details panel of the test log",
+              "name" : "extended_message",
+              "paramType" : "query",
+              "required" : false
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Posts an image of the specified object to the test log"
+        }
+      ],
+      "path" : "\/log\/screenshot"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "POST",
+          "notes" : "In the test log, you can place related log messages in separate folders.<br\/>The method adds a new folder to the test log and activates it. All the subsequent messages will be posted to that folder.<\/br>You can post additional text to the <b>Details<\/b> panel of the test log. Use the <span style=\"font-family: monospace;\">extended_message<\/span> parameter to specify the needed text. It can be either plain text or HTML code (the additional text must start with a tag to be recognized as HTML code).<br \/>To close the folder, use the <span style=\"font-family: monospace;\">\/log\/folder\/close<\/span> method.",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "description" : "The folder name",
+              "name" : "caption",
+              "paramType" : "query",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "description" : "The additional text or HTML code that will be posted to the Details panel of the test log",
+              "name" : "extended_text",
+              "paramType" : "query",
+              "required" : false
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Creates a new folder in the test log"
+        }
+      ],
+      "path" : "\/log\/folder\/open"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "POST",
+          "notes" : "In the test log, you can place related log messages in separate folders.<br\/>The method closes the current folder of the test log. The parent folder of that folder becomes the current one. All the subsequent log messages will be posted to the parent folder.",
+          "parameters" : [
+
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Closes the current folder in the test log"
+        }
+      ],
+      "path" : "\/log\/folder\/close"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "GET",
+          "notes" : "Returns the current test log in the specified format. The available formats are:<br \/><code>packed_html<\/code> — an HTML file and related files packed into a single ZIP archive;<br \/><code>mht<\/code> — a single MIME HTML archive.<br \/><h4>Result Value<\/h4><p>The object that contains the generated file encoded in Base64.<\/p>",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "description" : "The format of the file that will store the log contents",
+              "enum" : [
+                "packed_html",
+                "mht"
+              ],
+              "name" : "format",
+              "paramType" : "query",
+              "required" : true
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Returns the current log's contents"
+        }
+      ],
+      "path" : "\/log"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "GET",
+          "notes" : "The method returns an array of options that are available for the current project.",
+          "parameters" : [
+
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Returns the available options"
+        }
+      ],
+      "path" : "\/options"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "POST",
+          "notes" : "Returns the OK status if the option value has been set successfully. Available options: <br><table><tr><th>ID<\/th><th>Name<\/th><th>Allowed values<\/th><th>Description<\/th><\/tr><tr><td><b><i>\"flex.install_flex_injector\"<\/i><\/b><\/td><td>Install FlashInjector at the beginning of test recording and playback<\/td><td>Boolean values<\/td><td>If selected, TestComplete automatically installs its Flash and Flex testing module into Flash Player when you start recording or running a test.\r\nNOTE: To use this option, the debug version of Flash Player must be installed.<\/td><\/tr><tr><td><b><i>\"general.auto_wait_timeout\"<\/i><\/b><\/td><td>Auto-wait timeout, ms<\/td><td>Integer values<\/td><td>Milliseconds to wait for an expected object to become available, or for an unexpected window to close, before posting a timeout error.<\/td><\/tr><tr><td><b><i>\"general.dragging_delay\"<\/i><\/b><\/td><td>Dragging delay, ms<\/td><td>Integer values<\/td><td>Specifies the number of milliseconds it takes the mouse cursor to pass 20 pixels.<\/td><\/tr><tr><td><b><i>\"general.object_mapping\"<\/i><\/b><\/td><td>Object List<\/td><td>A JSON object with the following fields: \"path\" - contains the path to the object mapping entry (mapping category names, separated by dots); \"operation\" - should be \"add\"; \"classes\" - an array of objects describing the classes to add. Each object contains a string field \"name\" and a boolean field \"includeDerived\" <\/td><td>An editable list of onscreen objects grouped by classes from various libraries that should be used for mapping actions against the objects.<\/td><\/tr><tr><td><b><i>\"general.post_image_on_error\"<\/i><\/b><\/td><td>Post image on error<\/td><td>Boolean values<\/td><td>If this options is enabled, TestComplete makes a screenshot of the screen and saves it to the log when an error occurs.<\/td><\/tr><tr><td><b><i>\"general.use_case_sensitive_args\"<\/i><\/b><\/td><td>Use case-sensitive parameters<\/td><td>Boolean values<\/td><td>Sets whether functions that simulate user actions (ClickItem, DblClickItem, SelectItem, etc.) will process string parameters with case-sensitivity.<\/td><\/tr><tr><td><b><i>\"javafx.class_filter\"<\/i><\/b><\/td><td>JavaFX nodes to be included in the object hierarchy<\/td><td>An array of JSON objects with the following fields: \"name\" - contains full class names (wildcards are supported); \"derived_classes\" - a Boolean value. True if the derived classes should be included in the object hierarchy.<\/td><td>The class names of JavaFX objects that will be included in the hierarchy of test objects.<\/td><\/tr><tr><td><b><i>\"msaa.window_filter\"<\/i><\/b><\/td><td>List of accepted windows<\/td><td>A JSON array of strings<\/td><td>A list of windows that will be shown as MSAA objects.<\/td><\/tr><tr><td><b><i>\"processfilter.mode\"<\/i><\/b><\/td><td>Process filter mode<\/td><td>\"use_all\", \"use_only_selected\", \"ignore_selected\"<\/td><td>Specifies the mode in which TestComplete will work with processes.<\/td><\/tr><tr><td><b><i>\"processfilter.process_list\"<\/i><\/b><\/td><td>Process list<\/td><td>A JSON array of strings<\/td><td>These are process names that will be either permitted or ignored.<\/td><\/tr><tr><td><b><i>\"text_recognition.window_filter\"<\/i><\/b><\/td><td>List of accepted windows<\/td><td>A JSON array of strings<\/td><td>A list of class names of windows whose text will be captured. Wildcards (? and *) are supported.<\/td><\/tr><tr><td><b><i>\"ui_automation.window_filter\"<\/i><\/b><\/td><td>List of accepted windows<\/td><td>A JSON array of strings<\/td><td>A list of windows that will be shown as UIA objects.<\/td><\/tr><tr><td><b><i>\"visualizer.collect_style\"<\/i><\/b><\/td><td>Capture style<\/td><td>\"top_level_parent\", \"desktop\"<\/td><td>Specifies the screen area that will be captured.<\/td><\/tr><tr><td><b><i>\"visualizer.mode\"<\/i><\/b><\/td><td>Collect Test Visualizer data during test run<\/td><td>\"off\", \"capture_images\"<\/td><td>Specifies which data Test Visualizer captures during test runs.<\/td><\/tr><tr><td><b><i>\"web.page_load_timeout\"<\/i><\/b><\/td><td>Web page loading timeout, ms<\/td><td>Integer values<\/td><td>The number of milliseconds to wait until the browser loads the page and is ready to accept user input before continuing the test execution.<\/td><\/tr><tr><td><b><i>\"web.use_xpath_and_css\"<\/i><\/b><\/td><td>Use XPath and CSS selectors for web objects (required for cross-platform web tests)<\/td><td>Boolean values<\/td><td>Create tests to be run on Windows, macOS, Linux, Android, and iOS.<\/td><\/tr><tr><td><b><i>\"wpf.composite_controls\"<\/i><\/b><\/td><td>Composite controls<\/td><td>A JSON object with the following fields: \"class_name\" - the fully-qualified class name of the control with template-generated elements; \"name\" - the application-defined name of the control. <\/td><td>WPF objects whose control template elements will be exposed and displayed in the hierarchy of test objects.<\/td><\/tr><tr><td><b><i>\"wpf.composite_item_controls\"<\/i><\/b><\/td><td>ItemsControl objects with composite items<\/td><td>A JSON object with the following fields: \"class_name\" - the fully-qualified class name of the control with template-generated elements; \"name\" - the application-defined name of the control. <\/td><td>WPF objects that contain items whose control template elements will be exposed and displayed in the hierarchy of test objects.<\/td><\/tr><tr><td><b><i>\"wpf.simplified_object_tree\"<\/i><\/b><\/td><td>Simplified WPF object tree<\/td><td>Boolean values<\/td><td>Excludes some non-interactive WPF elements (such as panels, decorators, etc.) from the hierarchy of test objects, which simplifies the hierarchy and improves the test engine performance.<\/td><\/tr><\/table>",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "description" : "The option identifier",
+              "enum" : [
+                "flex.install_flex_injector",
+                "general.auto_wait_timeout",
+                "general.dragging_delay",
+                "general.object_mapping",
+                "general.post_image_on_error",
+                "general.use_case_sensitive_args",
+                "javafx.class_filter",
+                "msaa.window_filter",
+                "processfilter.mode",
+                "processfilter.process_list",
+                "text_recognition.window_filter",
+                "ui_automation.window_filter",
+                "visualizer.collect_style",
+                "visualizer.mode",
+                "web.page_load_timeout",
+                "web.use_xpath_and_css",
+                "wpf.composite_controls",
+                "wpf.composite_item_controls",
+                "wpf.simplified_object_tree"
+              ],
+              "name" : "id",
+              "paramType" : "path",
+              "required" : true
+            },
+            {
+              "dataType" : "string",
+              "description" : "The option value",
+              "name" : "value",
+              "paramType" : "query",
+              "required" : true
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Assigns a new value to the specified TestComplete option"
+        },
+        {
+          "method" : "GET",
+          "notes" : "Returns the option value. Available options: <br><table><tr><th>ID<\/th><th>Name<\/th><th>Allowed values<\/th><th>Description<\/th><\/tr><tr><td><b><i>\"flex.install_flex_injector\"<\/i><\/b><\/td><td>Install FlashInjector at the beginning of test recording and playback<\/td><td>Boolean values<\/td><td>If selected, TestComplete automatically installs its Flash and Flex testing module into Flash Player when you start recording or running a test.\r\nNOTE: To use this option, the debug version of Flash Player must be installed.<\/td><\/tr><tr><td><b><i>\"general.auto_wait_timeout\"<\/i><\/b><\/td><td>Auto-wait timeout, ms<\/td><td>Integer values<\/td><td>Milliseconds to wait for an expected object to become available, or for an unexpected window to close, before posting a timeout error.<\/td><\/tr><tr><td><b><i>\"general.dragging_delay\"<\/i><\/b><\/td><td>Dragging delay, ms<\/td><td>Integer values<\/td><td>Specifies the number of milliseconds it takes the mouse cursor to pass 20 pixels.<\/td><\/tr><tr><td><b><i>\"general.object_mapping\"<\/i><\/b><\/td><td>Object List<\/td><td>A JSON object with the following fields: \"path\" - contains the path to the object mapping entry (mapping category names, separated by dots); \"operation\" - should be \"add\"; \"classes\" - an array of objects describing the classes to add. Each object contains a string field \"name\" and a boolean field \"includeDerived\" <\/td><td>An editable list of onscreen objects grouped by classes from various libraries that should be used for mapping actions against the objects.<\/td><\/tr><tr><td><b><i>\"general.post_image_on_error\"<\/i><\/b><\/td><td>Post image on error<\/td><td>Boolean values<\/td><td>If this options is enabled, TestComplete makes a screenshot of the screen and saves it to the log when an error occurs.<\/td><\/tr><tr><td><b><i>\"general.use_case_sensitive_args\"<\/i><\/b><\/td><td>Use case-sensitive parameters<\/td><td>Boolean values<\/td><td>Sets whether functions that simulate user actions (ClickItem, DblClickItem, SelectItem, etc.) will process string parameters with case-sensitivity.<\/td><\/tr><tr><td><b><i>\"javafx.class_filter\"<\/i><\/b><\/td><td>JavaFX nodes to be included in the object hierarchy<\/td><td>An array of JSON objects with the following fields: \"name\" - contains full class names (wildcards are supported); \"derived_classes\" - a Boolean value. True if the derived classes should be included in the object hierarchy.<\/td><td>The class names of JavaFX objects that will be included in the hierarchy of test objects.<\/td><\/tr><tr><td><b><i>\"msaa.window_filter\"<\/i><\/b><\/td><td>List of accepted windows<\/td><td>A JSON array of strings<\/td><td>A list of windows that will be shown as MSAA objects.<\/td><\/tr><tr><td><b><i>\"processfilter.mode\"<\/i><\/b><\/td><td>Process filter mode<\/td><td>\"use_all\", \"use_only_selected\", \"ignore_selected\"<\/td><td>Specifies the mode in which TestComplete will work with processes.<\/td><\/tr><tr><td><b><i>\"processfilter.process_list\"<\/i><\/b><\/td><td>Process list<\/td><td>A JSON array of strings<\/td><td>These are process names that will be either permitted or ignored.<\/td><\/tr><tr><td><b><i>\"text_recognition.window_filter\"<\/i><\/b><\/td><td>List of accepted windows<\/td><td>A JSON array of strings<\/td><td>A list of class names of windows whose text will be captured. Wildcards (? and *) are supported.<\/td><\/tr><tr><td><b><i>\"ui_automation.window_filter\"<\/i><\/b><\/td><td>List of accepted windows<\/td><td>A JSON array of strings<\/td><td>A list of windows that will be shown as UIA objects.<\/td><\/tr><tr><td><b><i>\"visualizer.collect_style\"<\/i><\/b><\/td><td>Capture style<\/td><td>\"top_level_parent\", \"desktop\"<\/td><td>Specifies the screen area that will be captured.<\/td><\/tr><tr><td><b><i>\"visualizer.mode\"<\/i><\/b><\/td><td>Collect Test Visualizer data during test run<\/td><td>\"off\", \"capture_images\"<\/td><td>Specifies which data Test Visualizer captures during test runs.<\/td><\/tr><tr><td><b><i>\"web.page_load_timeout\"<\/i><\/b><\/td><td>Web page loading timeout, ms<\/td><td>Integer values<\/td><td>The number of milliseconds to wait until the browser loads the page and is ready to accept user input before continuing the test execution.<\/td><\/tr><tr><td><b><i>\"web.use_xpath_and_css\"<\/i><\/b><\/td><td>Use XPath and CSS selectors for web objects (required for cross-platform web tests)<\/td><td>Boolean values<\/td><td>Create tests to be run on Windows, macOS, Linux, Android, and iOS.<\/td><\/tr><tr><td><b><i>\"wpf.composite_controls\"<\/i><\/b><\/td><td>Composite controls<\/td><td>A JSON object with the following fields: \"class_name\" - the fully-qualified class name of the control with template-generated elements; \"name\" - the application-defined name of the control. <\/td><td>WPF objects whose control template elements will be exposed and displayed in the hierarchy of test objects.<\/td><\/tr><tr><td><b><i>\"wpf.composite_item_controls\"<\/i><\/b><\/td><td>ItemsControl objects with composite items<\/td><td>A JSON object with the following fields: \"class_name\" - the fully-qualified class name of the control with template-generated elements; \"name\" - the application-defined name of the control. <\/td><td>WPF objects that contain items whose control template elements will be exposed and displayed in the hierarchy of test objects.<\/td><\/tr><tr><td><b><i>\"wpf.simplified_object_tree\"<\/i><\/b><\/td><td>Simplified WPF object tree<\/td><td>Boolean values<\/td><td>Excludes some non-interactive WPF elements (such as panels, decorators, etc.) from the hierarchy of test objects, which simplifies the hierarchy and improves the test engine performance.<\/td><\/tr><\/table>",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "description" : "The option identifier",
+              "enum" : [
+                "flex.install_flex_injector",
+                "general.auto_wait_timeout",
+                "general.dragging_delay",
+                "general.object_mapping",
+                "general.post_image_on_error",
+                "general.use_case_sensitive_args",
+                "javafx.class_filter",
+                "msaa.window_filter",
+                "processfilter.mode",
+                "processfilter.process_list",
+                "text_recognition.window_filter",
+                "ui_automation.window_filter",
+                "visualizer.collect_style",
+                "visualizer.mode",
+                "web.page_load_timeout",
+                "web.use_xpath_and_css",
+                "wpf.composite_controls",
+                "wpf.composite_item_controls",
+                "wpf.simplified_object_tree"
+              ],
+              "name" : "id",
+              "paramType" : "path",
+              "required" : true
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Returns the value of the specified TestComplete option"
+        }
+      ],
+      "path" : "\/options\/{id}"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "GET",
+          "notes" : "Returns the current version of the product that provides the REST API.",
+          "parameters" : [
+
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Returns the current version of the product's executable"
+        }
+      ],
+      "path" : "\/version"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "GET",
+          "notes" : "Returns information about the product updates that are available for downloading.",
+          "parameters" : [
+
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Returns information about product updates"
+        }
+      ],
+      "path" : "\/version\/updates"
+    },
+    {
+      "operations" : [
+        {
+          "method" : "POST",
+          "notes" : "Downloads and installs the specified product update. The method returns the result before the installation is complete. There is no direct way to check whether the update has been installed successfully.",
+          "parameters" : [
+            {
+              "dataType" : "string",
+              "description" : "Update identifier",
+              "name" : "id",
+              "paramType" : "path",
+              "required" : true
+            }
+          ],
+          "responseMessages" : [
+            {
+              "code" : 200,
+              "message" : "The method was executed successfully."
+            },
+            {
+              "code" : 401,
+              "message" : "The user is not authorized to access the service."
+            },
+            {
+              "code" : 500,
+              "message" : "The method returned an error."
+            }
+          ],
+          "summary" : "Installs the specified product update"
+        }
+      ],
+      "path" : "\/version\/updates\/{id}\/install"
+    }
+  ]
+}
